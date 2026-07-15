@@ -1,0 +1,36 @@
+server-name: ""
+
+preload-skins: true
+
+permissions:
+  bypass-cooldown: "aqualive.bypass"
+
+commands:
+  permission: "aqualive.use"
+
+  admin-permission: "aqualive.admin"
+
+  aliases:
+    - "live"
+    - "stream"
+    - "directo"
+    - "envivo"
+
+blacklist-server-send:
+  - "auth"
+
+platforms:
+  kick:
+    domain: "kick.com"
+    permission: "aqualive.kick"
+    cooldown: 120
+
+  twitch:
+    domain: "twitch.tv"
+    permission: "aqualive.twitch"
+    cooldown: 60
+
+  youtube:
+    domain: "youtube.com"
+    permission: "aqualive.youtube"
+    cooldown: 300

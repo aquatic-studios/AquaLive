@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':shared')
+
+    compileOnly "com.velocitypowered:velocity-api:${velocityVersion}"
+
+    implementation "org.bstats:bstats-velocity:${bstatsVersion}"
+}
