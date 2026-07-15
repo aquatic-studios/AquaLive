@@ -1,0 +1,9 @@
+{
+  "id": "aqualive",
+  "name": "AquaLive",
+  "version": "${version}",
+  "description": "Multi-platform Live Stream",
+  "url": "https://github.com/aquatic-studios/",
+  "authors": ["Senkex"],
+  "main": "com.aquaticstudios.aqualive.platforms.velocity.VelocityAquaLive"
+}
