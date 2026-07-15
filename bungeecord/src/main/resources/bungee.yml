@@ -1,0 +1,5 @@
+name: AquaLive
+version: '${version}'
+author: 'Senkex'
+
+main: com.aquaticstudios.aqualive.platforms.bungeecord.BungeeAquaLive
