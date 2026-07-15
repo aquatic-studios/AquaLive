@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bukkit/AquaLive.bukkit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bukkit/AquaLive.bukkit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bukkit/AquaLive.bukkit.test.iml" filepath="$PROJECT_DIR$/.idea/modules/bukkit/AquaLive.bukkit.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bungeecord/AquaLive.bungeecord.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bungeecord/AquaLive.bungeecord.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bungeecord/AquaLive.bungeecord.test.iml" filepath="$PROJECT_DIR$/.idea/modules/bungeecord/AquaLive.bungeecord.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jar/AquaLive.jar.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jar/AquaLive.jar.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jar/AquaLive.jar.test.iml" filepath="$PROJECT_DIR$/.idea/modules/jar/AquaLive.jar.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AquaLive.main.iml" filepath="$PROJECT_DIR$/.idea/modules/AquaLive.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/AquaLive.shared.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/AquaLive.shared.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/AquaLive.shared.test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/AquaLive.shared.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AquaLive.test.iml" filepath="$PROJECT_DIR$/.idea/modules/AquaLive.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/velocity/AquaLive.velocity.main.iml" filepath="$PROJECT_DIR$/.idea/modules/velocity/AquaLive.velocity.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/velocity/AquaLive.velocity.test.iml" filepath="$PROJECT_DIR$/.idea/modules/velocity/AquaLive.velocity.test.iml" />
+    </modules>
+  </component>
+</project>

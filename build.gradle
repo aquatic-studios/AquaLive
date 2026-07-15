@@ -1,0 +1,33 @@
+plugins {
+    id 'com.gradleup.shadow' version '9.5.1' apply false
+}
+
+allprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        maven { url = uri('https://jitpack.io') }
+        maven { url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/') }
+        maven { url = uri('https://repo.papermc.io/repository/maven-public/') }
+        maven { url = uri('https://repo.extendedclip.com/releases/') }
+        maven { url = uri('https://libraries.minecraft.net/') }
+    }
+
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(javaVersion as int)
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(ProcessResources).configureEach {
+        filteringCharset = 'UTF-8'
+        def props = [version: project.version]
+        inputs.properties props
+        filesMatching(['plugin.yml', 'bungee.yml', 'velocity-plugin.json', 'messages.yml']) {
+            expand props
+        }
+    }
+}

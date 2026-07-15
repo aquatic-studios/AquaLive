@@ -1,0 +1,10 @@
+dependencies {
+    implementation "net.kyori:adventure-api:${adventureVersion}"
+    implementation "net.kyori:adventure-text-minimessage:${adventureVersion}"
+    implementation "net.kyori:adventure-text-serializer-legacy:${adventureVersion}"
+
+    implementation "com.github.senkex:CenterMessage:${centerMessageVersion}"
+    implementation "com.github.senkex:HeadRender:${headRenderVersion}"
+
+    implementation "org.yaml:snakeyaml:${snakeyamlVersion}"
+}

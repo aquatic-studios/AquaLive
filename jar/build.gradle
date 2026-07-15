@@ -1,0 +1,29 @@
+apply plugin: 'com.gradleup.shadow'
+
+dependencies {
+    implementation project(':shared')
+    implementation project(':bukkit')
+    implementation project(':bungeecord')
+    implementation project(':velocity')
+}
+
+shadowJar {
+    archiveFileName = 'AquaLive.jar'
+    destinationDirectory = rootProject.layout.buildDirectory.dir('libs')
+
+    relocate 'net.kyori.adventure.platform', 'com.aquaticstudios.aqualive.libs.adventure.platform'
+    relocate 'com.github.senkex.centermessage', 'com.aquaticstudios.aqualive.libs.centermessage'
+    relocate 'com.github.senkex.headrender', 'com.aquaticstudios.aqualive.libs.headrender'
+    relocate 'org.yaml.snakeyaml', 'com.aquaticstudios.aqualive.libs.snakeyaml'
+    relocate 'org.bstats', 'com.aquaticstudios.aqualive.libs.bstats'
+
+    exclude 'META-INF/maven/**'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    mergeServiceFiles()
+}
+
+tasks.named('jar') { enabled = false }
+tasks.named('build') { dependsOn tasks.named('shadowJar') }
