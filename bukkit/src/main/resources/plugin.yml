@@ -1,0 +1,15 @@
+#                                                            Developed by Senkex
+#                                                        (Aquatic Studios @ (C) 2026)
+
+name: AquaLive
+version: '${version}'
+author: 'Senkex'
+
+main: com.aquaticstudios.aqualive.platforms.bukkit.BukkitAquaLive
+website: 'https://github.com/aquatic-studios/'
+
+api-version: '1.16'
+folia-supported: true
+
+softdepend:
+  - PlaceholderAPI

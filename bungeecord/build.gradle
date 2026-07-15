@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':shared')
+
+    compileOnly "net.md-5:bungeecord-api:${bungeeVersion}"
+
+    implementation "net.kyori:adventure-platform-bungeecord:${adventurePlatformVersion}"
+    implementation "org.bstats:bstats-bungeecord:${bstatsVersion}"
+}
