@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(':shared')
+
+    compileOnly "org.spigotmc:spigot-api:${spigotVersion}"
+    compileOnly "me.clip:placeholderapi:${placeholderApiVersion}"
+
+    implementation "net.kyori:adventure-platform-bukkit:${adventurePlatformVersion}"
+    implementation "org.bstats:bstats-bukkit:${bstatsVersion}"
+}
