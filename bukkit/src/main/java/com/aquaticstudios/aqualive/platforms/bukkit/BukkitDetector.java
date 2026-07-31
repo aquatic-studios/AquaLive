@@ -6,9 +6,6 @@ import org.bukkit.Bukkit;
 import java.util.Locale;
 
 public final class BukkitDetector {
-    private BukkitDetector() {
-    }
-
     public static PlatformType detect() {
         if (isFolia()) return PlatformType.FOLIA;
         if (isPurpur()) return PlatformType.PURPUR;

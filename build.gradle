@@ -26,7 +26,7 @@ allprojects {
         filteringCharset = 'UTF-8'
         def props = [version: project.version]
         inputs.properties props
-        filesMatching(['plugin.yml', 'bungee.yml', 'velocity-plugin.json', 'messages.yml']) {
+        filesMatching(['plugin.yml', 'bungee.yml', 'velocity-plugin.json', 'messages.yml', 'aqualive.properties']) {
             expand props
         }
     }

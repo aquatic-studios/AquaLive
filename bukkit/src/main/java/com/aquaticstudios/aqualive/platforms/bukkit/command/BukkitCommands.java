@@ -17,9 +17,6 @@ import java.util.Locale;
 import java.util.logging.Level;
 
 public final class BukkitCommands {
-    private BukkitCommands() {
-    }
-
     public static void register(final JavaPlugin plugin, final AquaLive core, final BukkitAudiences audiences) {
         final CommandMap map = commandMap();
         if (map == null) {
