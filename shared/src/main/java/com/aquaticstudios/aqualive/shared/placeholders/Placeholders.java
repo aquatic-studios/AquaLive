@@ -11,9 +11,6 @@ public final class Placeholders {
     private PlaceholderHook resolver = PlaceholderHook.NONE;
     private AquaPlayer target;
 
-    private Placeholders() {
-    }
-
     public static Placeholders create() {
         return new Placeholders();
     }

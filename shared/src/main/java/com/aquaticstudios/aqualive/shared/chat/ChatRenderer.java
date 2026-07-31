@@ -19,9 +19,6 @@ public final class ChatRenderer {
 
     private static final Pattern CENTER_TAG = Pattern.compile("(?is)^\\s*<center>(.*?)</center>\\s*$");
 
-    private ChatRenderer() {
-    }
-
     public static Component line(final String raw,
                                  final Placeholders placeholders,
                                  final Map<String, Component> buttons) {

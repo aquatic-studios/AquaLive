@@ -14,9 +14,6 @@ public final class Buttons {
 
     private static final String CLICK_SERVER = "server";
 
-    private Buttons() {
-    }
-
     public static Component build(final YamlFile messages,
                                   final String buttonId,
                                   final Placeholders placeholders,

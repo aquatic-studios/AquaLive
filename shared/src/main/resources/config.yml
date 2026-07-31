@@ -1,24 +1,32 @@
+# name shown as %server% in broadcasts, leave "" to detect it automatically
 server-name: ""
 
+# cache the head skin on join so <hd> head broadcasts show instantly instead of waiting on a download
 preload-skins: true
 
 permissions:
+  # players with this node skip every platform cooldown
   bypass-cooldown: "aqualive.bypass"
 
 commands:
+  # needed to run the announce command and go live
   permission: "aqualive.use"
-
+  # needed for /aqualive help, reload and platforms
   admin-permission: "aqualive.admin"
 
+  # names that trigger the announce command, the first one is the main label
   aliases:
     - "live"
     - "stream"
     - "directo"
     - "envivo"
 
+# on a proxy, streams sent from these servers are blocked (e.g. auth or limbo)
 blacklist-server-send:
   - "auth"
 
+# one block per stream site, the id must match the same block in platforms.yml
+# domain = matched against the url | permission = delete the line to allow everyone | cooldown = seconds between uses
 platforms:
   kick:
     domain: "kick.com"

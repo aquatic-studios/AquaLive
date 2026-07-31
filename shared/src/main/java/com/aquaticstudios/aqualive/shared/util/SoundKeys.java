@@ -6,9 +6,6 @@ import net.kyori.adventure.sound.Sound;
 import java.util.Locale;
 
 public final class SoundKeys {
-    private SoundKeys() {
-    }
-
     public static Sound parse(final String id, final float volume, final float pitch) {
         final Key key = key(id);
         return key == null ? null : Sound.sound(key, Sound.Source.MASTER, volume, pitch);

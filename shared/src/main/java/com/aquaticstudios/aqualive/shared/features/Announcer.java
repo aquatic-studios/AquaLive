@@ -3,6 +3,7 @@ package com.aquaticstudios.aqualive.shared.features;
 import com.aquaticstudios.aqualive.shared.chat.Buttons;
 import com.aquaticstudios.aqualive.shared.chat.ChatRenderer;
 import com.aquaticstudios.aqualive.shared.config.Messages;
+import com.aquaticstudios.aqualive.shared.config.Platforms;
 import com.aquaticstudios.aqualive.shared.config.Settings;
 import com.aquaticstudios.aqualive.shared.config.StreamPlatform;
 import com.aquaticstudios.aqualive.shared.config.YamlFile;
@@ -28,15 +29,20 @@ public final class Announcer {
     private final Platform platform;
     private final Settings settings;
     private final Messages messages;
+    private final Platforms platforms;
 
-    public Announcer(final Platform platform, final Settings settings, final Messages messages) {
+    public Announcer(final Platform platform,
+                     final Settings settings,
+                     final Messages messages,
+                     final Platforms platforms) {
         this.platform = platform;
         this.settings = settings;
         this.messages = messages;
+        this.platforms = platforms;
     }
 
     public void broadcast(final AquaPlayer streamer, final StreamPlatform stream, final String url) {
-        final YamlFile yaml = messages.yaml();
+        final YamlFile yaml = platforms.yaml();
         final String section = "advertisement." + stream.id();
 
         if (!yaml.getBoolean(section + ".enabled", true)) return;

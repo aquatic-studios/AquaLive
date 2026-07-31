@@ -3,9 +3,6 @@ package com.aquaticstudios.aqualive.shared.util;
 import java.util.Locale;
 
 public final class Urls {
-    private Urls() {
-    }
-
     public static String normalize(final String input) {
         final String trimmed = input.trim();
         if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;

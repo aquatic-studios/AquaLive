@@ -17,9 +17,6 @@ public final class HeadLayout {
 
     private static final int HEAD_ROWS = 8;
 
-    private HeadLayout() {
-    }
-
     public static String validate(final YamlFile messages, final String section) {
         final List<String> rows = messages.getStringList(section + ".broadcast.chat.head.rows");
         if (rows.isEmpty()) {

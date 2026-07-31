@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class ClassicLayout {
-    private ClassicLayout() {
-    }
-
     public static List<Component> build(final YamlFile messages,
                                         final String section,
                                         final Placeholders placeholders,

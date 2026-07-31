@@ -1,6 +1,7 @@
 package com.aquaticstudios.aqualive.shared.command;
 
 import com.aquaticstudios.aqualive.shared.AquaLive;
+import com.aquaticstudios.aqualive.shared.BuildInfo;
 import com.aquaticstudios.aqualive.shared.chat.ChatRenderer;
 import com.aquaticstudios.aqualive.shared.config.Messages;
 import com.aquaticstudios.aqualive.shared.config.Settings;
@@ -27,20 +28,16 @@ public final class AquaLiveCommand {
     }
 
     public void execute(final Sender sender, final String[] args) {
-        if (!sender.hasPermission(settings.adminPermission())) {
-            send(sender, "no-permission");
-            return;
-        }
-
         if (args.length == 0) {
-            help(sender);
+            banner(sender);
             return;
         }
 
         switch (args[0].toLowerCase(Locale.ROOT)) {
+            case "help" -> help(sender);
             case "reload" -> reload(sender);
             case "platforms" -> platforms(sender);
-            default -> help(sender);
+            default -> send(sender, "unknown-command");
         }
     }
 
@@ -48,7 +45,25 @@ public final class AquaLiveCommand {
         return SUB_COMMANDS;
     }
 
+    private void banner(final Sender sender) {
+        final Placeholders placeholders = Placeholders.create();
+        final String[] lines = {
+                " ",
+                "            &#54ADF4&lAquaLive &fversion &#8DFF87[" + BuildInfo.VERSION + "]",
+                "                      &fPlatform: &7(" + core.platform().type().displayName() + ")",
+                "           &fPowered by &#8BD5FFSenkex @ Aquatic Studios",
+                " "
+        };
+        for (final String line : lines) {
+            sender.audience().sendMessage(ChatRenderer.text(line, placeholders));
+        }
+    }
+
     private void reload(final Sender sender) {
+        if (!sender.hasPermission(settings.adminPermission())) {
+            send(sender, "no-permission");
+            return;
+        }
         try {
             core.reload();
             send(sender, "reload");
@@ -59,12 +74,20 @@ public final class AquaLiveCommand {
     }
 
     private void help(final Sender sender) {
+        if (!sender.hasPermission(settings.adminPermission())) {
+            send(sender, "no-permission");
+            return;
+        }
         for (final String line : messages.list("messages.help")) {
             sender.audience().sendMessage(ChatRenderer.text(line, Placeholders.create()));
         }
     }
 
     private void platforms(final Sender sender) {
+        if (!sender.hasPermission(settings.adminPermission())) {
+            send(sender, "no-permission");
+            return;
+        }
         for (final String line : messages.list("messages.platforms")) {
             if (!line.contains("%platform_name%")) {
                 sender.audience().sendMessage(ChatRenderer.text(line, Placeholders.create()));
