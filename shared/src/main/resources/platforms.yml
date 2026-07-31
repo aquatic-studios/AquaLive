@@ -1,0 +1,157 @@
+advertisement:
+  kick:
+    enabled: true
+    broadcast:
+      chat:
+        enabled: true
+        layout: "head"
+        head:
+          skin: "%player%"
+          fallback-skin: "c06f8906-4c8a-4911-9c29-ea1dbd1aab82"
+          rows:
+            - "<hd>"
+            - "<hd>  &#38FF35&lKICK"
+            - "<hd>"
+            - "<hd>  &#38FF35Streamer &7» &f%player%"
+            - "<hd>  &#38FF35Link &7» %button_link%"
+            - "<hd>  &#38FF35Server &7» %button_server%"
+            - "<hd>  &#38FF35Online &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>"
+        lines:
+          - " "
+          - "<center>&#38FF35&lKICK</center>"
+          - "<center>&#54ADF4%player% &fis now &#38FF35LIVE</center>"
+          - "<center>%button_kick%</center>"
+          - " "
+      sound:
+        enabled: true
+        id: "ENTITY_PLAYER_LEVELUP"
+        volume: 1
+        pitch: 1
+      title:
+        enabled: true
+        up: "&#38FF35&lKICK"
+        down: "&#54ADF4%player% &fis live on &#38FF35&lKICK"
+        fade-in: 500
+        stay: 3000
+        fade-out: 500
+
+  twitch:
+    enabled: true
+    broadcast:
+      chat:
+        enabled: true
+        layout: "head"
+        head:
+          skin: "%player%"
+          fallback-skin: "c06f8906-4c8a-4911-9c29-ea1dbd1aab82"
+          rows:
+            - "<hd>"
+            - "<hd>  &#9146FF&lTWITCH"
+            - "<hd>"
+            - "<hd>  &#9146FFStreamer &7» &f%player%"
+            - "<hd>  &#9146FFLink &7» %button_link%"
+            - "<hd>  &#9146FFServer &7» %button_server%"
+            - "<hd>  &#9146FFOnline &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>"
+        lines:
+          - " "
+          - "<center>&#9146FF&lTWITCH</center>"
+          - "<center>&#54ADF4%player% &fis now &#9146FFLIVE</center>"
+          - "<center>%button_twitch%</center>"
+          - " "
+      sound:
+        enabled: true
+        id: "ENTITY_PLAYER_LEVELUP"
+        volume: 1
+        pitch: 1
+      title:
+        enabled: true
+        up: "&#9146FF&lTWITCH"
+        down: "&#54ADF4%player% &fis live on &#9146FF&lTWITCH"
+        fade-in: 500
+        stay: 3000
+        fade-out: 500
+
+  youtube:
+    enabled: true
+    broadcast:
+      chat:
+        enabled: true
+        layout: "head"
+        head:
+          skin: "%player%"
+          fallback-skin: "c06f8906-4c8a-4911-9c29-ea1dbd1aab82"
+          rows:
+            - "<hd>"
+            - "<hd>  &#FF3B3B&lYOUTUBE"
+            - "<hd>"
+            - "<hd>  &#FF3B3BStreamer &7» &f%player%"
+            - "<hd>  &#FF3B3BLink &7» %button_link%"
+            - "<hd>  &#FF3B3BServer &7» %button_server%"
+            - "<hd>  &#FF3B3BOnline &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>"
+        lines:
+          - " "
+          - "<center>&#FF3B3B&lYOUTUBE</center>"
+          - "<center>&#54ADF4%player% &fis now &#FF3B3BLIVE</center>"
+          - "<center>%button_youtube%</center>"
+          - " "
+      sound:
+        enabled: true
+        id: "ENTITY_PLAYER_LEVELUP"
+        volume: 1
+        pitch: 1
+      title:
+        enabled: true
+        up: "&#FF3B3B&lYOUTUBE"
+        down: "&#54ADF4%player% &fis live on &#FF3B3B&lYOUTUBE"
+        fade-in: 500
+        stay: 3000
+        fade-out: 500
+
+buttons:
+  link:
+    text: "&#54ADF4(Click to Open)"
+    hover:
+      - "&fOpen the live stream"
+      - "&#54ADF4%url%"
+    click:
+      type: "url"
+      value: "%url%"
+
+  server:
+    text: "&#54ADF4%server% &7(Click to join)"
+    hover:
+      - "&fClick to join this server"
+      - "&#54ADF4%server%"
+    click:
+      type: "server"
+      value: "%server%"
+
+  kick:
+    text: "&#38FF35[ WATCH ON KICK ]"
+    hover:
+      - "&fOpen the live stream"
+      - "&#38FF35Kick &7» &f%url%"
+    click:
+      type: "url"
+      value: "%url%"
+
+  twitch:
+    text: "&#9146FF[ WATCH ON TWITCH ]"
+    hover:
+      - "&fOpen the live stream"
+      - "&#9146FFTwitch &7» &f%url%"
+    click:
+      type: "url"
+      value: "%url%"
+
+  youtube:
+    text: "&#FF3B3B[ WATCH ON YOUTUBE ]"
+    hover:
+      - "&fOpen the live stream"
+      - "&#FF3B3BYouTube &7» &f%url%"
+    click:
+      type: "url"
+      value: "%url%"
