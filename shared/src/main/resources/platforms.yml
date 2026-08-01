@@ -15,7 +15,7 @@ advertisement:
             - "<hd>  &#38FF35Streamer &7» &f%player%"
             - "<hd>  &#38FF35Link &7» %button_link%"
             - "<hd>  &#38FF35Server &7» %button_server%"
-            - "<hd>  &#38FF35Online &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>  &#38FF35Online &7» &#54ADF4%server_online%/%server_max_players%"
             - "<hd>"
         lines:
           - " "
@@ -52,7 +52,7 @@ advertisement:
             - "<hd>  &#9146FFStreamer &7» &f%player%"
             - "<hd>  &#9146FFLink &7» %button_link%"
             - "<hd>  &#9146FFServer &7» %button_server%"
-            - "<hd>  &#9146FFOnline &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>  &#9146FFOnline &7» &#54ADF4%server_online%/%server_max_players%"
             - "<hd>"
         lines:
           - " "
@@ -89,7 +89,7 @@ advertisement:
             - "<hd>  &#FF3B3BStreamer &7» &f%player%"
             - "<hd>  &#FF3B3BLink &7» %button_link%"
             - "<hd>  &#FF3B3BServer &7» %button_server%"
-            - "<hd>  &#FF3B3BOnline &7» &7%server_online%/&8%server_max_players%"
+            - "<hd>  &#FF3B3BOnline &7» &#54ADF4%server_online%/%server_max_players%"
             - "<hd>"
         lines:
           - " "
@@ -109,6 +109,44 @@ advertisement:
         fade-in: 500
         stay: 3000
         fade-out: 500
+
+  # example, remove the # to add your own platform (also add it to config.yml + webhook.yml)
+  # facebook:
+  #   enabled: true
+  #   broadcast:
+  #     chat:
+  #       enabled: true
+  #       layout: "head"
+  #       head:
+  #         skin: "%player%"
+  #         fallback-skin: "c06f8906-4c8a-4911-9c29-ea1dbd1aab82"
+  #         rows:
+  #           - "<hd>"
+  #           - "<hd>  &#1877F2&lFACEBOOK"
+  #           - "<hd>"
+  #           - "<hd>  &#1877F2Streamer &7» &f%player%"
+  #           - "<hd>  &#1877F2Link &7» %button_link%"
+  #           - "<hd>  &#1877F2Server &7» %button_server%"
+  #           - "<hd>  &#1877F2Online &7» &#54ADF4%server_online%/%server_max_players%"
+  #           - "<hd>"
+  #       lines:
+  #         - " "
+  #         - "<center>&#1877F2&lFACEBOOK</center>"
+  #         - "<center>&#54ADF4%player% &fis now &#1877F2LIVE</center>"
+  #         - "<center>%button_facebook%</center>"
+  #         - " "
+  #     sound:
+  #       enabled: true
+  #       id: "ENTITY_PLAYER_LEVELUP"
+  #       volume: 1
+  #       pitch: 1
+  #     title:
+  #       enabled: true
+  #       up: "&#1877F2&lFACEBOOK"
+  #       down: "&#54ADF4%player% &fis live on &#1877F2&lFACEBOOK"
+  #       fade-in: 500
+  #       stay: 3000
+  #       fade-out: 500
 
 buttons:
   link:
@@ -155,3 +193,13 @@ buttons:
     click:
       type: "url"
       value: "%url%"
+
+  # example button for the facebook platform above
+  # facebook:
+  #   text: "&#1877F2[ WATCH ON FACEBOOK ]"
+  #   hover:
+  #     - "&fOpen the live stream"
+  #     - "&#1877F2Facebook &7» &f%url%"
+  #   click:
+  #     type: "url"
+  #     value: "%url%"

@@ -5,8 +5,10 @@ import com.aquaticstudios.aqualive.shared.command.LiveCommand;
 import com.aquaticstudios.aqualive.shared.config.Messages;
 import com.aquaticstudios.aqualive.shared.config.Platforms;
 import com.aquaticstudios.aqualive.shared.config.Settings;
+import com.aquaticstudios.aqualive.shared.config.Webhook;
 import com.aquaticstudios.aqualive.shared.features.Announcer;
 import com.aquaticstudios.aqualive.shared.features.Cooldowns;
+import com.aquaticstudios.aqualive.shared.features.WebhookSender;
 import com.aquaticstudios.aqualive.shared.platform.AquaPlayer;
 import com.aquaticstudios.aqualive.shared.platform.Platform;
 import com.github.senkex.headrender.HeadRender;
@@ -18,6 +20,8 @@ public final class AquaLive {
     private final Settings settings;
     private final Messages messages;
     private final Platforms platforms;
+    private final Webhook webhook;
+    private final WebhookSender webhookSender;
     private final Cooldowns cooldowns = new Cooldowns();
 
     private final LiveCommand live;
@@ -26,13 +30,16 @@ public final class AquaLive {
     private AquaLive(final Platform platform,
                      final Settings settings,
                      final Messages messages,
-                     final Platforms platforms) {
+                     final Platforms platforms,
+                     final Webhook webhook) {
         this.platform = platform;
         this.settings = settings;
         this.messages = messages;
         this.platforms = platforms;
+        this.webhook = webhook;
 
-        final Announcer broadcast = new Announcer(platform, settings, messages, platforms);
+        this.webhookSender = new WebhookSender(platform, webhook);
+        final Announcer broadcast = new Announcer(platform, settings, messages, platforms, webhookSender);
         this.live = new LiveCommand(platform, settings, messages, cooldowns, broadcast);
         this.admin = new AquaLiveCommand(this, settings, messages);
     }
@@ -41,8 +48,9 @@ public final class AquaLive {
         final Settings settings = Settings.load(platform.dataFolder());
         final Messages messages = Messages.load(platform.dataFolder());
         final Platforms platforms = Platforms.load(platform.dataFolder());
+        final Webhook webhook = Webhook.load(platform.dataFolder());
 
-        final AquaLive core = new AquaLive(platform, settings, messages, platforms);
+        final AquaLive core = new AquaLive(platform, settings, messages, platforms, webhook);
         platform.logger().info("AquaLive enabled on " + platform.type().displayName());
         return core;
     }
@@ -51,6 +59,8 @@ public final class AquaLive {
         settings.reload();
         messages.reload();
         platforms.reload();
+        webhook.reload();
+        webhookSender.resetWarnings();
         cooldowns.clear();
 
         HeadRender.clearCache();

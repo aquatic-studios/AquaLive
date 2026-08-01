@@ -49,9 +49,8 @@ public final class AquaLiveCommand {
         final Placeholders placeholders = Placeholders.create();
         final String[] lines = {
                 " ",
-                "            &#54ADF4&lAquaLive &fversion &#8DFF87[" + BuildInfo.VERSION + "]",
-                "                      &fPlatform: &7(" + core.platform().type().displayName() + ")",
-                "           &fPowered by &#8BD5FFSenkex @ Aquatic Studios",
+                "            &fPowered by &#8BD5FFSenkex @ Aquatic Studios",
+                "     &#54ADF4&lAquaLive &fversion &#8DFF87[" + BuildInfo.VERSION + "] &f| Platform: &7(" + core.platform().type().displayName() + ")",
                 " "
         };
         for (final String line : lines) {

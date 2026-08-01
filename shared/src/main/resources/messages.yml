@@ -6,20 +6,19 @@ syntax:
       - " "
       - "&#54ADF4&lAquaLive &7- &fSyntax"
       - " "
-      - "&#54ADF4/%aliases% %domain% &7- &fAnnounce your live stream"
-      - " "
       - "&#54ADF4Platforms &7- &f%platforms_available%"
+      - "&#54ADF4/%aliases% %domain% &7- &fAnnounce your live stream"
       - " "
 
 messages:
   help:
     - " "
-    - "&#54ADF4&lAquaLive &7- &fCommands &7(v${version})"
+    - "&#54ADF4&lAquaLive &7- &fCommands"
     - " "
     - "&#54ADF4/live <url> &7- &fAnnounce your live stream"
     - " "
-    - "&#54ADF4/aqualive platforms &7- &fList available platforms"
     - "&#54ADF4/aqualive reload &7- &fReload all files"
+    - "&#54ADF4/aqualive platforms &7- &fList available platforms"
     - " "
 
   platforms:

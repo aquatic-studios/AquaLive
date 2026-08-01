@@ -1,5 +1,5 @@
 # name shown as %server% in broadcasts, leave "" to detect it automatically
-server-name: ""
+server-name: "ServerName"
 
 # cache the head skin on join so <hd> head broadcasts show instantly instead of waiting on a download
 preload-skins: true
@@ -42,3 +42,9 @@ platforms:
     domain: "youtube.com"
     permission: "aqualive.youtube"
     cooldown: 300
+
+  # example, remove the # to add your own platform (copy a block in platforms.yml + webhook.yml too)
+  # facebook:
+  #   domain: "facebook.com"
+  #   permission: "aqualive.facebook"
+  #   cooldown: 300

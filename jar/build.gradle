@@ -11,7 +11,7 @@ shadowJar {
     archiveFileName = 'AquaLive.jar'
     destinationDirectory = rootProject.layout.buildDirectory.dir('libs')
 
-    relocate 'net.kyori.adventure.platform', 'com.aquaticstudios.aqualive.libs.adventure.platform'
+    relocate 'net.kyori', 'com.aquaticstudios.aqualive.libs'
     relocate 'com.github.senkex.centermessage', 'com.aquaticstudios.aqualive.libs.centermessage'
     relocate 'com.github.senkex.headrender', 'com.aquaticstudios.aqualive.libs.headrender'
     relocate 'org.yaml.snakeyaml', 'com.aquaticstudios.aqualive.libs.snakeyaml'

@@ -30,15 +30,18 @@ public final class Announcer {
     private final Settings settings;
     private final Messages messages;
     private final Platforms platforms;
+    private final WebhookSender webhook;
 
     public Announcer(final Platform platform,
                      final Settings settings,
                      final Messages messages,
-                     final Platforms platforms) {
+                     final Platforms platforms,
+                     final WebhookSender webhook) {
         this.platform = platform;
         this.settings = settings;
         this.messages = messages;
         this.platforms = platforms;
+        this.webhook = webhook;
     }
 
     public void broadcast(final AquaPlayer streamer, final StreamPlatform stream, final String url) {
@@ -61,6 +64,7 @@ public final class Announcer {
         }
         sendSound(yaml, section);
         sendTitle(yaml, section, placeholders);
+        webhook.send(stream, placeholders);
     }
 
     private void sendChat(final YamlFile yaml,
