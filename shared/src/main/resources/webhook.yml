@@ -1,0 +1,116 @@
+# master switch, false = never send to discord
+enabled: false
+
+# shared by every platform, override any of these inside a platform block
+defaults:
+  # paste your discord webhook url here
+  url: "INSERT-URL-HERE"
+  # webhook name and avatar, leave "" to keep the ones set on discord
+  username: "AquaLive"
+  avatar-url: "https://mc-heads.net/avatar/%player%/128"
+  # text above the embed, this is where pings live
+  content: "%mention% **%player%** is now live!"
+  # replaces %mention% in content, @everyone @here or <@&ROLE_ID>, "" to disable pings
+  mention: "@everyone"
+
+# one block per site, the id must match the same id in platforms.yml
+platforms:
+  kick:
+    enabled: true
+    # embed side color, hex (#38FF35) or decimal
+    color: "#38FF35"
+    embed:
+      author:
+        name: "%player% • KICK"
+        icon-url: "https://mc-heads.net/avatar/%player%/64"
+        url: "%url%"
+      title: "🔴 %player% is now LIVE on Kick!"
+      # title link, keep %url% so clicking it opens the stream
+      url: "%url%"
+      description: "Come hang out in the stream and drop a follow!\n\n**Platform** » Kick\n**Server** » %server%\n**Online** » %server_online%/%server_max_players%"
+      # big image under the embed, "" to hide
+      image: ""
+      # small image top-right, "" to hide
+      thumbnail: "https://mc-heads.net/avatar/%player%/128"
+      # extra rows, inline true = side by side, delete the list for none
+      fields:
+        - name: "Watch here"
+          value: "[Click to open](%url%)"
+          inline: true
+        - name: "Server"
+          value: "%server%"
+          inline: true
+      footer:
+        text: "Kick • %player%"
+        icon-url: ""
+      # true = stamp the current time on the embed
+      timestamp: true
+
+  twitch:
+    enabled: true
+    color: "#9146FF"
+    embed:
+      author:
+        name: "%player% • TWITCH"
+        icon-url: "https://mc-heads.net/avatar/%player%/64"
+        url: "%url%"
+      title: "🔴 %player% is now LIVE on Twitch!"
+      url: "%url%"
+      description: "Come hang out in the stream and drop a follow!\n\n**Platform** » Twitch\n**Server** » %server%\n**Online** » %server_online%/%server_max_players%"
+      image: ""
+      thumbnail: "https://mc-heads.net/avatar/%player%/128"
+      fields:
+        - name: "Watch here"
+          value: "[Click to open](%url%)"
+          inline: true
+        - name: "Server"
+          value: "%server%"
+          inline: true
+      footer:
+        text: "Twitch • %player%"
+        icon-url: ""
+      timestamp: true
+
+  youtube:
+    enabled: true
+    color: "#FF3B3B"
+    embed:
+      author:
+        name: "%player% • YOUTUBE"
+        icon-url: "https://mc-heads.net/avatar/%player%/64"
+        url: "%url%"
+      title: "🔴 %player% is now LIVE on YouTube!"
+      url: "%url%"
+      description: "Come hang out in the stream and drop a like!\n\n**Platform** » YouTube\n**Server** » %server%\n**Online** » %server_online%/%server_max_players%"
+      image: ""
+      thumbnail: "https://mc-heads.net/avatar/%player%/128"
+      fields:
+        - name: "Watch here"
+          value: "[Click to open](%url%)"
+          inline: true
+        - name: "Server"
+          value: "%server%"
+          inline: true
+      footer:
+        text: "YouTube • %player%"
+        icon-url: ""
+      timestamp: true
+
+  # example, remove the # to add your own platform (also add it to config.yml + platforms.yml)
+  # facebook:
+  #   enabled: true
+  #   color: "#1877F2"
+  #   embed:
+  #     author:
+  #       name: "%player% • FACEBOOK"
+  #       icon-url: "https://mc-heads.net/avatar/%player%/64"
+  #       url: "%url%"
+  #     title: "🔴 %player% is now LIVE on Facebook!"
+  #     url: "%url%"
+  #     description: "Come hang out in the stream!\n\n**Server** » %server%\n**Online** » %server_online%/%server_max_players%"
+  #     image: ""
+  #     thumbnail: "https://mc-heads.net/avatar/%player%/128"
+  #     footer:
+  #       text: "Facebook • %player%"
+  #       icon-url: ""
+  #     timestamp: true
