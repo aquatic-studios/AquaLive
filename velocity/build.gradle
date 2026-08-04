@@ -3,5 +3,7 @@ dependencies {
 
     compileOnly "com.velocitypowered:velocity-api:${velocityVersion}"
 
+    implementation "net.kyori:adventure-text-serializer-gson:${adventureVersion}"
+
     implementation "org.bstats:bstats-velocity:${bstatsVersion}"
 }

@@ -7,9 +7,11 @@ import net.kyori.adventure.audience.Audience;
 
 public final class VelocitySender implements Sender {
     private final CommandSource source;
+    private final Audience audience;
 
     public VelocitySender(final CommandSource source) {
         this.source = source;
+        this.audience = new VelocityAudience(source);
     }
 
     @Override
@@ -24,6 +26,6 @@ public final class VelocitySender implements Sender {
 
     @Override
     public Audience audience() {
-        return source;
+        return audience;
     }
 }

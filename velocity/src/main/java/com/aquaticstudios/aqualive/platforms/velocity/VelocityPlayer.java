@@ -8,9 +8,11 @@ import java.util.UUID;
 
 public final class VelocityPlayer implements AquaPlayer {
     private final Player player;
+    private final Audience audience;
 
     public VelocityPlayer(final Player player) {
         this.player = player;
+        this.audience = new VelocityAudience(player);
     }
 
     @Override
@@ -30,7 +32,7 @@ public final class VelocityPlayer implements AquaPlayer {
 
     @Override
     public Audience audience() {
-        return player;
+        return audience;
     }
 
     @Override

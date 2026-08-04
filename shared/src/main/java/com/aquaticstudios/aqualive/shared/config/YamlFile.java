@@ -77,6 +77,17 @@ public final class YamlFile {
         }
     }
 
+    public double getDouble(final String path, final double def) {
+        final Object v = get(path);
+        if (v instanceof Number) return ((Number) v).doubleValue();
+        if (v == null) return def;
+        try {
+            return Double.parseDouble(String.valueOf(v).trim());
+        } catch (NumberFormatException ignored) {
+            return def;
+        }
+    }
+
     public boolean getBoolean(final String path, final boolean def) {
         final Object v = get(path);
         if (v instanceof Boolean) return (Boolean) v;

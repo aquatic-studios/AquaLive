@@ -19,11 +19,13 @@ public final class BungeePlatform implements Platform {
     private final Plugin plugin;
     private final BungeeAudiences audiences;
     private final PluginLogger logger;
+    private final Scheduler scheduler;
 
     public BungeePlatform(final Plugin plugin, final BungeeAudiences audiences) {
         this.plugin = plugin;
         this.audiences = audiences;
         this.logger = new JavaLogger(plugin.getLogger());
+        this.scheduler = new BungeeScheduler(plugin);
     }
 
     @Override
@@ -48,7 +50,7 @@ public final class BungeePlatform implements Platform {
 
     @Override
     public Scheduler scheduler() {
-        return Runnable::run;
+        return scheduler;
     }
 
     @Override

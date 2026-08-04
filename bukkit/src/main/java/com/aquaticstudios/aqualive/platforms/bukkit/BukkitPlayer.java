@@ -2,7 +2,10 @@ package com.aquaticstudios.aqualive.platforms.bukkit;
 
 import com.aquaticstudios.aqualive.shared.platform.AquaPlayer;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -34,6 +37,36 @@ public final class BukkitPlayer implements AquaPlayer {
     @Override
     public Audience audience() {
         return audiences.player(player);
+    }
+
+    @Override
+    public void sendMessage(final Component message) {
+        if (BukkitDisplay.sendMessage(player, message)) return;
+        audience().sendMessage(message);
+    }
+
+    @Override
+    public void showTitle(final Title title) {
+        if (BukkitDisplay.showTitle(player, title)) return;
+        audience().showTitle(title);
+    }
+
+    @Override
+    public void sendActionBar(final Component message) {
+        if (BukkitDisplay.sendActionBar(player, message)) return;
+        audience().sendActionBar(message);
+    }
+
+    @Override
+    public void showBossBar(final BossBar bar) {
+        if (BukkitDisplay.showBossBar(player, bar)) return;
+        audience().showBossBar(bar);
+    }
+
+    @Override
+    public void hideBossBar(final BossBar bar) {
+        if (BukkitDisplay.hideBossBar(player, bar)) return;
+        audience().hideBossBar(bar);
     }
 
     @Override

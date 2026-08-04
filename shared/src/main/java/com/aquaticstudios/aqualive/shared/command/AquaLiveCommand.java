@@ -54,7 +54,7 @@ public final class AquaLiveCommand {
                 " "
         };
         for (final String line : lines) {
-            sender.audience().sendMessage(ChatRenderer.text(line, placeholders));
+            sender.sendMessage(ChatRenderer.text(line, placeholders));
         }
     }
 
@@ -67,7 +67,7 @@ public final class AquaLiveCommand {
             core.reload();
             send(sender, "reload");
         } catch (IOException ex) {
-            sender.audience().sendMessage(ChatRenderer.text(
+            sender.sendMessage(ChatRenderer.text(
                     "&cReload failed: " + ex.getMessage(), Placeholders.create()));
         }
     }
@@ -78,7 +78,7 @@ public final class AquaLiveCommand {
             return;
         }
         for (final String line : messages.list("messages.help")) {
-            sender.audience().sendMessage(ChatRenderer.text(line, Placeholders.create()));
+            sender.sendMessage(ChatRenderer.text(line, Placeholders.create()));
         }
     }
 
@@ -89,11 +89,11 @@ public final class AquaLiveCommand {
         }
         for (final String line : messages.list("messages.platforms")) {
             if (!line.contains("%platform_name%")) {
-                sender.audience().sendMessage(ChatRenderer.text(line, Placeholders.create()));
+                sender.sendMessage(ChatRenderer.text(line, Placeholders.create()));
                 continue;
             }
             for (final StreamPlatform platform : settings.platforms().values()) {
-                sender.audience().sendMessage(ChatRenderer.text(line, Placeholders.create()
+                sender.sendMessage(ChatRenderer.text(line, Placeholders.create()
                         .set("platform_name", platform.id())
                         .set("platform_domain", platform.domain())
                         .set("platform_permission", platform.permission() == null ? "-" : platform.permission())
@@ -105,6 +105,6 @@ public final class AquaLiveCommand {
     private void send(final Sender to, final String path) {
         final String raw = messages.get(path);
         if (raw.isEmpty()) return;
-        to.audience().sendMessage(ChatRenderer.text(raw, Placeholders.create()));
+        to.sendMessage(ChatRenderer.text(raw, Placeholders.create()));
     }
 }

@@ -17,11 +17,16 @@ public final class VelocityPlatform implements Platform {
     private final ProxyServer server;
     private final PluginLogger logger;
     private final Path dataFolder;
+    private final Scheduler scheduler;
 
-    public VelocityPlatform(final ProxyServer server, final Logger logger, final Path dataFolder) {
+    public VelocityPlatform(final ProxyServer server,
+                            final Logger logger,
+                            final Path dataFolder,
+                            final Object plugin) {
         this.server = server;
         this.logger = new VelocityLogger(logger);
         this.dataFolder = dataFolder;
+        this.scheduler = new VelocityScheduler(server, plugin);
     }
 
     @Override
@@ -45,7 +50,7 @@ public final class VelocityPlatform implements Platform {
 
     @Override
     public Scheduler scheduler() {
-        return Runnable::run;
+        return scheduler;
     }
 
     @Override

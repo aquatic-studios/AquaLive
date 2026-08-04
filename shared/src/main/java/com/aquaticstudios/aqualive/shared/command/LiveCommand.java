@@ -87,13 +87,13 @@ public final class LiveCommand {
                 .set("platforms_available", String.join(", ", settings.platforms().keySet()));
 
         for (final String line : messages.list("syntax.aliases.error")) {
-            to.audience().sendMessage(ChatRenderer.text(line, placeholders));
+            to.sendMessage(ChatRenderer.text(line, placeholders));
         }
     }
 
     private void send(final Sender to, final String path, final Placeholders placeholders) {
         final String raw = messages.get(path);
         if (raw.isEmpty()) return;
-        to.audience().sendMessage(ChatRenderer.text(raw, placeholders));
+        to.sendMessage(ChatRenderer.text(raw, placeholders));
     }
 }

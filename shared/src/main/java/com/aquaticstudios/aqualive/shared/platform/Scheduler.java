@@ -1,6 +1,9 @@
 package com.aquaticstudios.aqualive.shared.platform;
 
-@FunctionalInterface
+import java.time.Duration;
+
 public interface Scheduler {
     void sync(Runnable task);
+
+    void later(Runnable task, Duration delay);
 }

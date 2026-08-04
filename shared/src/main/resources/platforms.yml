@@ -35,6 +35,17 @@ advertisement:
         fade-in: 500
         stay: 3000
         fade-out: 500
+      actionbar:
+        enabled: true
+        text: "&#38FF35&lKICK &7» &#54ADF4%player% &fis now live"
+        duration: 5
+      bossbar:
+        enabled: true
+        text: "&#38FF35&lKICK &7» &#54ADF4%player% &fis now live"
+        color: "GREEN"
+        style: "PROGRESS"
+        progress: 1.0
+        duration: 8
 
   twitch:
     enabled: true
@@ -72,6 +83,17 @@ advertisement:
         fade-in: 500
         stay: 3000
         fade-out: 500
+      actionbar:
+        enabled: true
+        text: "&#9146FF&lTWITCH &7» &#54ADF4%player% &fis now live"
+        duration: 5
+      bossbar:
+        enabled: true
+        text: "&#9146FF&lTWITCH &7» &#54ADF4%player% &fis now live"
+        color: "PURPLE"
+        style: "PROGRESS"
+        progress: 1.0
+        duration: 8
 
   youtube:
     enabled: true
@@ -109,6 +131,17 @@ advertisement:
         fade-in: 500
         stay: 3000
         fade-out: 500
+      actionbar:
+        enabled: true
+        text: "&#FF3B3B&lYOUTUBE &7» &#54ADF4%player% &fis now live"
+        duration: 5
+      bossbar:
+        enabled: true
+        text: "&#FF3B3B&lYOUTUBE &7» &#54ADF4%player% &fis now live"
+        color: "RED"
+        style: "PROGRESS"
+        progress: 1.0
+        duration: 8
 
   # example, remove the # to add your own platform (also add it to config.yml + webhook.yml)
   # facebook:
@@ -147,6 +180,17 @@ advertisement:
   #       fade-in: 500
   #       stay: 3000
   #       fade-out: 500
+  #     actionbar:
+  #       enabled: true
+  #       text: "&#1877F2&lFACEBOOK &7» &#54ADF4%player% &fis now live"
+  #       duration: 5
+  #     bossbar:
+  #       enabled: true
+  #       text: "&#1877F2&lFACEBOOK &7» &#54ADF4%player% &fis now live"
+  #       color: "BLUE"
+  #       style: "PROGRESS"
+  #       progress: 1.0
+  #       duration: 8
 
 buttons:
   link:

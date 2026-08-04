@@ -41,7 +41,7 @@ public final class VelocityAquaLive {
     @Subscribe
     public void onProxyInitialize(final ProxyInitializeEvent event) {
         try {
-            core = AquaLive.start(new VelocityPlatform(server, logger, dataFolder));
+            core = AquaLive.start(new VelocityPlatform(server, logger, dataFolder, this));
         } catch (IOException ex) {
             logger.error("Could not read the configuration; AquaLive will stay idle", ex);
             return;

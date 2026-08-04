@@ -12,7 +12,9 @@ import com.aquaticstudios.aqualive.shared.features.layout.HeadLayout;
 import com.aquaticstudios.aqualive.shared.placeholders.Placeholders;
 import com.aquaticstudios.aqualive.shared.platform.AquaPlayer;
 import com.aquaticstudios.aqualive.shared.platform.Platform;
+import com.aquaticstudios.aqualive.shared.util.BossBars;
 import com.aquaticstudios.aqualive.shared.util.SoundKeys;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
@@ -22,9 +24,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public final class Announcer {
     private static final String LAYOUT_HEAD = "head";
+    private static final Duration ACTION_BAR_STEP = Duration.ofSeconds(1);
 
     private final Platform platform;
     private final Settings settings;
@@ -62,8 +66,10 @@ public final class Announcer {
         if (yaml.getBoolean(section + ".broadcast.chat.enabled", true)) {
             sendChat(yaml, section, placeholders, buttons);
         }
-        sendSound(yaml, section);
         sendTitle(yaml, section, placeholders);
+        sendActionBar(yaml, section, placeholders);
+        sendBossBar(yaml, section, placeholders);
+        sendSound(yaml, section);
         webhook.send(stream, placeholders);
     }
 
@@ -106,11 +112,7 @@ public final class Announcer {
                 (float) yaml.getInt(section + ".broadcast.sound.pitch", 1));
 
         if (sound == null) return;
-        platform.scheduler().sync(() -> {
-            for (final AquaPlayer user : recipients()) {
-                user.audience().playSound(sound);
-            }
-        });
+        each(user -> user.playSound(sound));
     }
 
     private void sendTitle(final YamlFile yaml, final String section, final Placeholders placeholders) {
@@ -124,22 +126,68 @@ public final class Announcer {
                         Duration.ofMillis(yaml.getInt(section + ".broadcast.title.stay", 3000)),
                         Duration.ofMillis(yaml.getInt(section + ".broadcast.title.fade-out", 500))));
 
-        platform.scheduler().sync(() -> {
-            for (final AquaPlayer user : recipients()) {
-                user.audience().showTitle(title);
-            }
-        });
+        each(user -> user.showTitle(title));
+    }
+
+    private void sendActionBar(final YamlFile yaml, final String section, final Placeholders placeholders) {
+        if (!yaml.getBoolean(section + ".broadcast.actionbar.enabled", true)) return;
+
+        final String raw = yaml.getString(section + ".broadcast.actionbar.text", "");
+        if (raw.isEmpty()) return;
+
+        final Component text = ChatRenderer.text(raw, placeholders);
+        repeatActionBar(text, Math.max(1, yaml.getInt(section + ".broadcast.actionbar.duration", 5)));
+    }
+
+    private void repeatActionBar(final Component text, final int remaining) {
+        each(user -> user.sendActionBar(text));
+        if (remaining <= 1) return;
+        platform.scheduler().later(() -> repeatActionBar(text, remaining - 1), ACTION_BAR_STEP);
+    }
+
+    private void sendBossBar(final YamlFile yaml, final String section, final Placeholders placeholders) {
+        if (!yaml.getBoolean(section + ".broadcast.bossbar.enabled", true)) return;
+
+        final String raw = yaml.getString(section + ".broadcast.bossbar.text", "");
+        if (raw.isEmpty()) return;
+
+        final BossBar bar = BossBars.create(
+                ChatRenderer.text(raw, placeholders),
+                yaml.getString(section + ".broadcast.bossbar.color", "WHITE"),
+                yaml.getString(section + ".broadcast.bossbar.style", "PROGRESS"),
+                yaml.getDouble(section + ".broadcast.bossbar.progress", 1.0));
+
+        final int seconds = Math.max(1, yaml.getInt(section + ".broadcast.bossbar.duration", 8));
+        final List<AquaPlayer> viewers = recipients();
+
+        platform.scheduler().sync(() -> deliver(viewers, user -> user.showBossBar(bar)));
+
+        platform.scheduler().later(
+                () -> platform.scheduler().sync(() -> deliver(viewers, user -> user.hideBossBar(bar))),
+                Duration.ofSeconds(seconds));
     }
 
     private void dispatch(final List<Component> lines) {
         if (lines.isEmpty()) return;
-        platform.scheduler().sync(() -> {
-            for (final AquaPlayer user : recipients()) {
-                for (final Component line : lines) {
-                    user.audience().sendMessage(line);
-                }
+        each(user -> {
+            for (final Component line : lines) {
+                user.sendMessage(line);
             }
         });
+    }
+
+    private void each(final Consumer<AquaPlayer> action) {
+        platform.scheduler().sync(() -> deliver(recipients(), action));
+    }
+
+    private void deliver(final List<AquaPlayer> users, final Consumer<AquaPlayer> action) {
+        for (final AquaPlayer user : users) {
+            try {
+                action.accept(user);
+            } catch (Throwable error) {
+                platform.logger().error("Could not deliver an announcement to " + user.name(), error);
+            }
+        }
     }
 
     private List<AquaPlayer> recipients() {

@@ -1,6 +1,7 @@
 package com.aquaticstudios.aqualive.platforms.velocity.command;
 
 import com.aquaticstudios.aqualive.platforms.velocity.VelocityPlayer;
+import com.aquaticstudios.aqualive.platforms.velocity.VelocitySender;
 import com.aquaticstudios.aqualive.shared.AquaLive;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
@@ -22,7 +23,7 @@ public final class VelocityLiveCommand implements SimpleCommand {
     @Override
     public void execute(final Invocation invocation) {
         if (!(invocation.source() instanceof Player player)) {
-            invocation.source().sendMessage(
+            new VelocitySender(invocation.source()).sendMessage(
                     Component.text("Only players can announce a stream.", NamedTextColor.RED));
             return;
         }

@@ -3,6 +3,7 @@ package com.aquaticstudios.aqualive.platforms.bukkit;
 import com.aquaticstudios.aqualive.shared.platform.Sender;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 
 public final class BukkitSender implements Sender {
@@ -27,5 +28,11 @@ public final class BukkitSender implements Sender {
     @Override
     public Audience audience() {
         return audiences.sender(sender);
+    }
+
+    @Override
+    public void sendMessage(final Component message) {
+        if (BukkitDisplay.sendMessage(sender, message)) return;
+        audience().sendMessage(message);
     }
 }
