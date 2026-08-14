@@ -11,10 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public final class BukkitLiveCommand implements CommandExecutor, TabCompleter {
     private final AquaLive core;
@@ -45,13 +43,6 @@ public final class BukkitLiveCommand implements CommandExecutor, TabCompleter {
                                       final Command command,
                                       final String label,
                                       final String[] args) {
-        if (args.length != 1) return Collections.emptyList();
-
-        final String typed = args[0].toLowerCase(Locale.ROOT);
-        final List<String> out = new ArrayList<>();
-        for (final String domain : core.live().domains()) {
-            if (domain.startsWith(typed)) out.add(domain);
-        }
-        return out;
+        return Collections.emptyList();
     }
 }

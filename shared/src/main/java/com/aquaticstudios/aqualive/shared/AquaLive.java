@@ -2,6 +2,7 @@ package com.aquaticstudios.aqualive.shared;
 
 import com.aquaticstudios.aqualive.shared.command.AquaLiveCommand;
 import com.aquaticstudios.aqualive.shared.command.LiveCommand;
+import com.aquaticstudios.aqualive.shared.config.ConfigAudit;
 import com.aquaticstudios.aqualive.shared.config.Messages;
 import com.aquaticstudios.aqualive.shared.config.Platforms;
 import com.aquaticstudios.aqualive.shared.config.Settings;
@@ -10,6 +11,7 @@ import com.aquaticstudios.aqualive.shared.features.Announcer;
 import com.aquaticstudios.aqualive.shared.features.Cooldowns;
 import com.aquaticstudios.aqualive.shared.features.WebhookSender;
 import com.aquaticstudios.aqualive.shared.platform.AquaPlayer;
+import com.aquaticstudios.aqualive.shared.platform.CommandSync;
 import com.aquaticstudios.aqualive.shared.platform.Platform;
 import com.github.senkex.headrender.HeadRender;
 
@@ -23,6 +25,8 @@ public final class AquaLive {
     private final Webhook webhook;
     private final WebhookSender webhookSender;
     private final Cooldowns cooldowns = new Cooldowns();
+
+    private CommandSync commandSync;
 
     private final LiveCommand live;
     private final AquaLiveCommand admin;
@@ -52,10 +56,11 @@ public final class AquaLive {
 
         final AquaLive core = new AquaLive(platform, settings, messages, platforms, webhook);
         platform.logger().info("AquaLive enabled on " + platform.type().displayName());
+        core.audit();
         return core;
     }
 
-    public void reload() throws IOException {
+    public ConfigAudit reload() throws IOException {
         settings.reload();
         messages.reload();
         platforms.reload();
@@ -64,6 +69,23 @@ public final class AquaLive {
         cooldowns.clear();
 
         HeadRender.clearCache();
+        if (commandSync != null) commandSync.sync(settings.aliases());
+        return audit();
+    }
+
+    private ConfigAudit audit() {
+        final ConfigAudit audit = ConfigAudit.run(settings, platforms, webhook);
+
+        platform.logger().info("Loaded " + settings.platforms().size() + " platform(s): "
+                + String.join(", ", settings.platforms().keySet()));
+
+        if (audit.isClean()) return audit;
+
+        platform.logger().warn("Found " + audit.problems().size() + " problem(s) in the AquaLive configuration:");
+        for (final String problem : audit.problems()) {
+            platform.logger().warn(" - " + problem);
+        }
+        return audit;
     }
 
     public void warmSkin(final AquaPlayer user) {
@@ -75,6 +97,10 @@ public final class AquaLive {
     public void stop() {
         HeadRender.shutdown();
         platform.logger().info("AquaLive disabled");
+    }
+
+    public void commandSync(final CommandSync sync) {
+        this.commandSync = sync;
     }
 
     public LiveCommand live() {

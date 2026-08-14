@@ -10,10 +10,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 public final class BungeeLiveCommand extends Command implements TabExecutor {
     private final AquaLive core;
@@ -37,13 +34,6 @@ public final class BungeeLiveCommand extends Command implements TabExecutor {
 
     @Override
     public Iterable<String> onTabComplete(final CommandSender sender, final String[] args) {
-        if (args.length > 1) return Collections.emptyList();
-
-        final String typed = args.length == 0 ? "" : args[0].toLowerCase(Locale.ROOT);
-        final List<String> out = new ArrayList<>();
-        for (final String domain : core.live().domains()) {
-            if (domain.startsWith(typed)) out.add(domain);
-        }
-        return out;
+        return Collections.emptyList();
     }
 }

@@ -8,10 +8,8 @@ import com.velocitypowered.api.proxy.Player;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public final class VelocityLiveCommand implements SimpleCommand {
     private final AquaLive core;
@@ -32,14 +30,6 @@ public final class VelocityLiveCommand implements SimpleCommand {
 
     @Override
     public List<String> suggest(final Invocation invocation) {
-        final String[] args = invocation.arguments();
-        if (args.length > 1) return Collections.emptyList();
-
-        final String typed = args.length == 0 ? "" : args[0].toLowerCase(Locale.ROOT);
-        final List<String> out = new ArrayList<>();
-        for (final String domain : core.live().domains()) {
-            if (domain.startsWith(typed)) out.add(domain);
-        }
-        return out;
+        return Collections.emptyList();
     }
 }

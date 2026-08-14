@@ -42,10 +42,19 @@ public final class WebhookSender {
 
         final String id = stream.id();
         final String section = "platforms." + id;
-        if (!yaml.contains(section) || !yaml.getBoolean(section + ".enabled", true)) return;
+        if (!yaml.contains(section)) {
+            warnOnce(id + "|missing",
+                    "webhook.yml has no 'platforms." + id + "' block, skipping the discord message for '" + id + "'");
+            return;
+        }
+        if (!yaml.getBoolean(section + ".enabled", true)) return;
 
         final String url = resolve(yaml, section, "url", placeholders);
-        if (!url.startsWith("http://") && !url.startsWith("https://")) return;
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            warnOnce(id + "|url", "webhook.yml has no valid url for '" + id + "', checked 'platforms." + id
+                    + ".url' and 'defaults.url'");
+            return;
+        }
 
         placeholders.set("mention", resolve(yaml, section, "mention", placeholders));
         post(url, buildPayload(yaml, section, placeholders), id);

@@ -43,7 +43,12 @@ public final class Settings {
         bypassCooldownPermission = yaml.getString("permissions.bypass-cooldown", "aqualive.bypass");
         serverName = yaml.getString("server-name", "");
         preloadSkins = yaml.getBoolean("preload-skins", true);
-        aliases = yaml.getStringList("commands.aliases");
+
+        aliases = new ArrayList<>();
+        for (final String raw : yaml.getStringList("commands.aliases")) {
+            final String alias = raw.trim().toLowerCase(Locale.ROOT);
+            if (!alias.isEmpty() && !aliases.contains(alias)) aliases.add(alias);
+        }
 
         platforms = new LinkedHashMap<>();
         for (final String id : yaml.getKeys("platforms")) {
@@ -60,6 +65,10 @@ public final class Settings {
         for (final String server : yaml.getStringList("blacklist-server-send")) {
             blacklistedServers.add(server.toLowerCase(Locale.ROOT));
         }
+    }
+
+    public YamlFile yaml() {
+        return yaml;
     }
 
     public String commandPermission() {

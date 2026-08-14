@@ -12,8 +12,6 @@ import com.aquaticstudios.aqualive.shared.platform.Platform;
 import com.aquaticstudios.aqualive.shared.platform.Sender;
 import com.aquaticstudios.aqualive.shared.util.Urls;
 
-import java.util.List;
-
 public final class LiveCommand {
     private final Platform platform;
     private final Settings settings;
@@ -74,10 +72,6 @@ public final class LiveCommand {
         }
 
         broadcast.broadcast(user, stream, url);
-    }
-
-    public List<String> domains() {
-        return settings.platforms().values().stream().map(StreamPlatform::domain).toList();
     }
 
     private void sendSyntax(final Sender to, final String label) {

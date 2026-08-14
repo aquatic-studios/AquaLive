@@ -1,7 +1,6 @@
 package com.aquaticstudios.aqualive.platforms.bungeecord;
 
-import com.aquaticstudios.aqualive.platforms.bungeecord.command.BungeeAquaLiveCommand;
-import com.aquaticstudios.aqualive.platforms.bungeecord.command.BungeeLiveCommand;
+import com.aquaticstudios.aqualive.platforms.bungeecord.command.BungeeCommands;
 import com.aquaticstudios.aqualive.shared.AquaLive;
 import net.kyori.adventure.platform.bungeecord.BungeeAudiences;
 import net.md_5.bungee.api.ProxyServer;
@@ -28,7 +27,7 @@ public final class BungeeAquaLive extends Plugin {
             return;
         }
 
-        registerCommands();
+        BungeeCommands.register(this, core, audiences);
         ProxyServer.getInstance().getPluginManager()
                 .registerListener(this, new BungeeEventListener(core, audiences));
         new Metrics(this, BSTATS_ID);
@@ -40,16 +39,6 @@ public final class BungeeAquaLive extends Plugin {
         if (audiences != null) {
             audiences.close();
             audiences = null;
-        }
-    }
-
-    private void registerCommands() {
-        final var manager = ProxyServer.getInstance().getPluginManager();
-
-        manager.registerCommand(this, new BungeeAquaLiveCommand(core, audiences));
-
-        for (final String alias : core.settings().aliases()) {
-            manager.registerCommand(this, new BungeeLiveCommand(alias, core, audiences));
         }
     }
 }

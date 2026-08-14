@@ -52,6 +52,11 @@ public final class Announcer {
         final YamlFile yaml = platforms.yaml();
         final String section = "advertisement." + stream.id();
 
+        if (!yaml.contains(section)) {
+            platform.logger().warn("platforms.yml has no '" + section + "' block, nothing to announce for '"
+                    + stream.id() + "'");
+            return;
+        }
         if (!yaml.getBoolean(section + ".enabled", true)) return;
 
         final String streamerServer = streamer.serverName();
@@ -61,7 +66,7 @@ public final class Announcer {
                 && !settings.isBlacklisted(streamerServer);
 
         final Placeholders placeholders = placeholders(streamer, stream, url);
-        final Map<String, Component> buttons = buttons(yaml, placeholders, serverClickAllowed);
+        final Map<String, Component> buttons = buttons(yaml, stream, placeholders, serverClickAllowed);
 
         if (yaml.getBoolean(section + ".broadcast.chat.enabled", true)) {
             sendChat(yaml, section, placeholders, buttons);
@@ -224,12 +229,18 @@ public final class Announcer {
     }
 
     private Map<String, Component> buttons(final YamlFile yaml,
+                                           final StreamPlatform stream,
                                            final Placeholders placeholders,
                                            final boolean serverClickAllowed) {
         final Map<String, Component> out = new LinkedHashMap<>();
         for (final String id : yaml.getKeys("buttons")) {
             out.put("%button_" + id + "%",
                     Buttons.build(yaml, id, placeholders, serverClickAllowed));
+        }
+
+        final String own = "%button_" + stream.id() + "%";
+        if (!out.containsKey(own)) {
+            out.put(own, Buttons.build(yaml, "link", placeholders, serverClickAllowed));
         }
         return out;
     }

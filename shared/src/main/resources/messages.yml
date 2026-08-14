@@ -32,6 +32,7 @@ messages:
   no-permission: "%prefix%You don't have permission to do that"
   unknown-command: "%prefix%Unknown command, try &#54ADF4/aqualive help"
   reload: "%prefix%Reloaded config & messages &#56FF00Correctly"
+  reload-warning: "%prefix%&#FFA42D[Warning] &f%problem%"
   platforms-no-permission: "%prefix%&#FFA42D[Warning] You need the permission &#54ADF4%platform_permission%"
   cooldown: "%prefix%&#FFA42D[Warning] Wait &#FFA42D%cooldown%s &fbefore using &#54ADF4/live &fagain"
   blacklisted-server: "%prefix%&#FFA42D[Warning] You cannot announce a live stream from this server"

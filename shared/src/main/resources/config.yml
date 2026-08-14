@@ -15,6 +15,7 @@ commands:
   admin-permission: "aqualive.admin"
 
   # names that trigger the announce command, the first one is the main label
+  # applied on /aqualive reload, no restart needed
   aliases:
     - "live"
     - "stream"

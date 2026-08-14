@@ -3,6 +3,7 @@ package com.aquaticstudios.aqualive.shared.command;
 import com.aquaticstudios.aqualive.shared.AquaLive;
 import com.aquaticstudios.aqualive.shared.BuildInfo;
 import com.aquaticstudios.aqualive.shared.chat.ChatRenderer;
+import com.aquaticstudios.aqualive.shared.config.ConfigAudit;
 import com.aquaticstudios.aqualive.shared.config.Messages;
 import com.aquaticstudios.aqualive.shared.config.Settings;
 import com.aquaticstudios.aqualive.shared.config.StreamPlatform;
@@ -16,6 +17,10 @@ import java.util.Locale;
 
 public final class AquaLiveCommand {
     private static final List<String> SUB_COMMANDS = Arrays.asList("reload", "platforms", "help");
+
+    private static final String WARNING_FALLBACK = "%prefix%&#FFA42D[Warning] &f%problem%";
+
+    private static final int WARNINGS_SHOWN = 8;
 
     private final AquaLive core;
     private final Settings settings;
@@ -64,11 +69,30 @@ public final class AquaLiveCommand {
             return;
         }
         try {
-            core.reload();
+            final ConfigAudit audit = core.reload();
             send(sender, "reload");
+            reportProblems(sender, audit);
         } catch (IOException ex) {
             sender.sendMessage(ChatRenderer.text(
                     "&cReload failed: " + ex.getMessage(), Placeholders.create()));
+        }
+    }
+
+    private void reportProblems(final Sender sender, final ConfigAudit audit) {
+        if (audit.isClean()) return;
+
+        String format = messages.get("reload-warning");
+        if (format.isEmpty()) format = WARNING_FALLBACK.replace("%prefix%", messages.prefix());
+
+        final List<String> problems = audit.problems();
+        for (final String problem : problems.subList(0, Math.min(WARNINGS_SHOWN, problems.size()))) {
+            sender.sendMessage(ChatRenderer.text(format, Placeholders.create().set("problem", problem)));
+        }
+
+        final int hidden = problems.size() - WARNINGS_SHOWN;
+        if (hidden > 0) {
+            sender.sendMessage(ChatRenderer.text(format, Placeholders.create()
+                    .set("problem", "and " + hidden + " more, check the console")));
         }
     }
 

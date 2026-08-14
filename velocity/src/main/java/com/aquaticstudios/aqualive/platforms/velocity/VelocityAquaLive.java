@@ -1,10 +1,8 @@
 package com.aquaticstudios.aqualive.platforms.velocity;
 
-import com.aquaticstudios.aqualive.platforms.velocity.command.VelocityAquaLiveCommand;
-import com.aquaticstudios.aqualive.platforms.velocity.command.VelocityLiveCommand;
+import com.aquaticstudios.aqualive.platforms.velocity.command.VelocityCommands;
 import com.aquaticstudios.aqualive.shared.AquaLive;
 import com.google.inject.Inject;
-import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
@@ -47,7 +45,7 @@ public final class VelocityAquaLive {
             return;
         }
 
-        registerCommands();
+        VelocityCommands.register(this, server, core);
         metricsFactory.make(this, BSTATS_ID);
     }
 
@@ -59,19 +57,5 @@ public final class VelocityAquaLive {
     @Subscribe
     public void onProxyShutdown(final ProxyShutdownEvent event) {
         if (core != null) core.stop();
-    }
-
-    private void registerCommands() {
-        final CommandManager commands = server.getCommandManager();
-
-        commands.register(
-                commands.metaBuilder("aqualive").plugin(this).build(),
-                new VelocityAquaLiveCommand(core));
-
-        for (final String alias : core.settings().aliases()) {
-            commands.register(
-                    commands.metaBuilder(alias).plugin(this).build(),
-                    new VelocityLiveCommand(core));
-        }
     }
 }
